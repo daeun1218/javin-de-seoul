@@ -1,0 +1,823 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* ── RESET ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+  background: #fff;
+  color: #0a0a0a;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 56px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.navLeft {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.navLeft a {
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.2s;
+}
+.navLeft a:hover {
+  opacity: 0.4;
+}
+
+.navLogo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  text-decoration: none;
+}
+.navRight {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.navRight a {
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.2s;
+}
+.navRight a:hover {
+  opacity: 0.4;
+}
+
+/* ─────────────────────────────────────────
+   1. HERO  1920 × 950
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px);
+  min-height: 600px;
+  max-height: 950px;
+  margin-top: 60px;
+  overflow: hidden;
+}
+
+.heroSlide {
+  position: absolute;
+  inset: 0;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+.heroSlide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.heroSlide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.heroSlideOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+/* 중앙 정렬 */
+.heroContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px 80px;
+  transition:
+    opacity 0.45s,
+    transform 0.45s;
+}
+.heroContent.animating {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.heroTag {
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
+  margin-bottom: 20px;
+  display: block;
+}
+.heroTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+.heroDesc {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  margin-bottom: 44px;
+  white-space: pre-line;
+  max-width: 360px;
+}
+.heroBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 14px 36px;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+.heroBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+.heroControls {
+  position: absolute;
+  bottom: 52px;
+  left: 60px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.heroIndex {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 300;
+  min-width: 48px;
+}
+.heroTrack {
+  width: 88px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.heroTrackFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  animation: trackProgress 5.5s linear forwards;
+}
+@keyframes trackProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.heroArrows {
+  position: absolute;
+  bottom: 44px;
+  right: 56px;
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+.heroArrow {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.22s,
+    border-color 0.22s;
+}
+.heroArrow:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ─────────────────────────────────────────
+   2. ABOUT BRAND  1920 × 980
+───────────────────────────────────────── */
+.aboutSection {
+  width: 100%;
+  min-height: 920px;
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+  align-items: center;
+  padding: 0 100px;
+  background: #fff;
+}
+
+.aboutDecoLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aboutDecoLabel {
+  font-size: 40px;
+  letter-spacing: 0.06em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  padding: 9px;
+  color: #c8c8c8;
+}
+
+.aboutImageWrap {
+  width: 100%;
+  max-width: 420px;
+  height: 560px;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding-right: 50px;
+}
+.aboutImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aboutText {
+  padding-left: 30px;
+}
+.aboutLabel {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #c0c0c0;
+  margin-bottom: 22px;
+  display: block;
+  font-weight: 400;
+}
+.aboutTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #0a0a0a;
+  margin-bottom: 28px;
+}
+.aboutRule {
+  width: 28px;
+  height: 1px;
+  background: #0a0a0a;
+  margin-bottom: 28px;
+}
+.aboutDesc {
+  font-size: 14px;
+  line-height: 1.95;
+  color: #777;
+  font-weight: 300;
+  max-width: 380px;
+}
+
+/* ─────────────────────────────────────────
+   3. SIGNATURE SELECTION  1920 × 1319
+───────────────────────────────────────── */
+.signatureSection {
+  width: 100%;
+  background: #0a0a0a;
+}
+.signatureHeader {
+  padding: 0 120px;
+  text-align: center;
+  position: relative;
+}
+
+.signatureEyebrow {
+  display: none;
+}
+.signatureTitleLine {
+  display: none;
+}
+.sigDivider {
+  display: none;
+}
+
+.signatureDividerFull {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
+  margin-left: -120px;
+  width: calc(100% + 240px);
+}
+
+.signatureTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.signatureTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(26px, 2.8vw, 40px);
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  padding: 28px 0;
+}
+.signatureSub {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 300;
+  padding: 28px 0;
+}
+
+.signatureGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.sigCard {
+  position: relative;
+  overflow: hidden;
+  height: 660px;
+  cursor: pointer;
+}
+.sigCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.75s ease;
+  filter: brightness(0.72);
+}
+.sigCard:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.82);
+}
+.sigCardContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 52px 60px;
+  align-items: center;
+}
+
+.sigCardTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(22px, 2.6vw, 36px);
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  line-height: 1.1;
+  text-align: center;
+}
+.sigCardBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding-bottom: 3px;
+  width: fit-content;
+  transition:
+    border-color 0.25s,
+    gap 0.3s;
+}
+.sigCard:hover .sigCardBtn {
+  border-color: #fff;
+  gap: 16px;
+}
+
+/* ─────────────────────────────────────────
+   BESTSELLERS
+───────────────────────────────────────── */
+.bestsellersSection {
+  padding: 104px 0 124px;
+  background: #fff;
+}
+.bestsellersHeader {
+  text-align: center;
+  margin-bottom: 52px;
+  padding: 0 120px;
+}
+.bestsellersEyebrow {
+  display: none;
+}
+.bestsellersTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  margin-bottom: 32px;
+}
+.bestsellersTabs {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #0a0a0a;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.bestsellersTab {
+  padding: 9px 28px;
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  color: #aaa;
+  transition: all 0.25s;
+}
+.bestsellersTab.active {
+  background: #0a0a0a;
+  color: #fff;
+  border-radius: 100px;
+}
+.bestsellersTab:not(.active):hover {
+  color: #0a0a0a;
+}
+.tabSep {
+  width: 1px;
+  height: 14px;
+  background: #dedede;
+  flex-shrink: 0;
+}
+
+.productsCarousel {
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
+}
+.productsTrack {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  flex: 1;
+}
+.productCard {
+  padding: 40px 40px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-right: none;
+}
+.productCard:last-child {
+  border-right: none;
+}
+.productCard:hover {
+  transform: translateY(-6px);
+}
+.productImgWrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: #f8f7f5;
+}
+.productImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.productCard:hover .productImg {
+  transform: scale(1.06);
+}
+.productName {
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #0a0a0a;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.productPrice {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.carouselArrow {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: 1px solid #0a0a0a;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #0a0a0a;
+  transition: all 0.25s;
+  border-radius: 50%;
+}
+.carouselArrow:hover {
+  background: #0a0a0a;
+  color: #fff;
+  border-color: #0a0a0a;
+}
+.carouselArrow:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+.carouselArrow:disabled:hover {
+  background: #fff;
+  color: #0a0a0a;
+  border-color: #e0e0e0;
+}
+
+/* ─────────────────────────────────────────
+   4. INSTAGRAM — 비대칭 레이아웃
+───────────────────────────────────────── */
+.instagramSection {
+  background: #f5f3f0;
+}
+.instaInner {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  min-height: 600px;
+}
+
+.instaMain {
+  overflow: hidden;
+  cursor: pointer;
+  height: 100%;
+}
+.instaMain img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instaRight {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.instaTextArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 48px 72px;
+  position: relative;
+  z-index: 1;
+  background: #f5f3f0;
+  flex: 0 0 auto;
+}
+
+.instaEyebrow {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #c0c0c0;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.instaHandle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(28px, 3.8vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0a0a0a;
+  margin-bottom: 24px;
+  line-height: 1;
+}
+.instaLink {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  text-decoration: none;
+  border-bottom: 1px solid #0a0a0a;
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+  font-weight: 500;
+}
+
+.instaSubGrid {
+  position: relative;
+  height: 100%;
+  min-height: 560px;
+}
+.instaSub {
+  position: absolute;
+  overflow: hidden;
+  cursor: pointer;
+}
+/* 첫 번째 사진 — 왼쪽 하단, 큰 정사각형 */
+.instaSub:nth-child(1) {
+  width: 30%;
+  height: 30%;
+  bottom: 0;
+  left: 0;
+}
+
+/* 두 번째 사진 — 오른쪽, 세로로 긴 형태 */
+.instaSub:nth-child(2) {
+  width: 46%;
+  height: 72%;
+  top: 0;
+  right: 0;
+}
+
+/* 세 번째 사진 — 오른쪽 하단, 작게 */
+.instaSub:nth-child(3) {
+  width: 44%;
+  height: 44%;
+  bottom: 0;
+  right: 2%;
+}
+
+.instaSub:last-child {
+  grid-column: unset;
+  height: 44%;
+}
+
+.instaSub img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.footer {
+  background: #fff;
+  padding: 48px 120px 28px;
+  border-top: 1px solid #f0eeec;
+}
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.footerNav {
+  display: flex;
+  gap: 28px;
+}
+.footerNav a {
+  font-size: 10.5px;
+  color: #0a0a0a;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: opacity 0.2s;
+  text-transform: uppercase;
+}
+.footerNav a:hover {
+  opacity: 0.4;
+}
+.footerSocial {
+  display: flex;
+  gap: 12px;
+}
+.footerSocial a {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e4e4e4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.footerSocial a:hover {
+  border-color: #0a0a0a;
+  color: #0a0a0a;
+}
+.footerInfo {
+  font-size: 10px;
+  color: #c0c0c0;
+  line-height: 2.2;
+  margin-bottom: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.footerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footerCopy {
+  font-size: 10px;
+  color: #ccc;
+  letter-spacing: 0.04em;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ─────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.heroContent > * {
+  animation: fadeUp 0.75s ease both;
+}
+.heroContent > *:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.heroContent > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.heroContent > *:nth-child(3) {
+  animation-delay: 0.32s;
+}
+.heroContent > *:nth-child(4) {
+  animation-delay: 0.44s;
+}
